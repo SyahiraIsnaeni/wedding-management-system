@@ -6,10 +6,7 @@ thymeleaf template engine -->
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Bootstrap -->
   <link
@@ -19,10 +16,11 @@ thymeleaf template engine -->
           crossorigin="anonymous"
   />
   <!-- Bootstrap -->
-  <title>Wedding Search</title>
+  <title>Edit Guest</title>
 </head>
 <body
-        class="container d-flex flex-column justify-content-center" style="min-height: 100vh"
+        class="container d-flex flex-column justify-content-center"
+        style="min-height: 100vh"
 >
 <!-- Bootstrap -->
 <script
@@ -43,38 +41,38 @@ thymeleaf template engine -->
 <!-- <body> -->
 <br>
 <br>
-<h1 class="text-center">LIST WEDDING SEARCH</h1>
+<h1 class="text-center">EDIT GUEST DATA</h1>
 <br>
+<div class="mt-3">
+  <form action="/editguest" method="post">
+    <div class="form-group">
+      <label for="guest_id">Guest ID</label>
+      <input required
+             type="text"
+             class="form-control"
+             id="guest_id"
+             name="guest_id"
+             th:value="${guests.guest_id}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="name">Guest Name</label>
+      <input required
+             type="text"
+             class="form-control"
+             id="name"
+             name="name"
+             th:value="${guests.name}"
+      />
+    </div>
 
-<div class="mt-2">
-  <table class="table">
-    <thead class="thead-dark">
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">COUPLE NAME</th>
-      <th scope="col">WEDDING DATE</th>
-      <th scope="col">ACTION</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr th:each="wed : ${weddings}">
-      <td th:text="${wed.wedding_id}"></td>
-      <td th:text="${wed.couple_name}"></td>
-      <td th:text="${wed.wedding_date}"></td>
-      <td>
-        <a th:href="@{/editwedding/{wedding_id}(wedding_id=${wed.wedding_id})}" class="btn btn-primary">Edit</a>
-        <a th:href="@{/weddingdetail/{wedding_id}(wedding_id=${wed.wedding_id})}" class="btn btn-primary">Detail</a>
-        <a th:href="@{/guest/{wedding_id}(wedding_id=${wed.wedding_id})}" class="btn btn-success">Guests</a>
-        <a th:href="@{/softdeletewedding/{wedding_id}(wedding_id=${wed.wedding_id})}" class="btn btn-danger">Delete</a>
-
-      </td>
-
-    </tr>
-    </tbody>
-  </table>
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary w-100 py-2 my-4">
+        Submit
+      </button>
+    </div>
+  </form>
 </div>
-
 <!-- Bootstrap -->
 </body>
 </html>

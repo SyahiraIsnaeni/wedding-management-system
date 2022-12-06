@@ -61,6 +61,7 @@ thymeleaf template engine -->
             <td th:text="${G.guest_id}"></td>
             <td th:text="${G.name}"></td>
             <td>
+                <a th:href="@{/editguest/{guest_id}(guest_id=${G.guest_id})}" class="btn btn-primary">Edit</a>
                 <a th:href="@{/deleteguest/{guest_id}(guest_id=${G.guest_id})}" class="btn btn-danger">Delete</a>
             </td>
         </tr>

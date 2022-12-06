@@ -231,4 +231,19 @@ public class WeddingController{
         return "redirect:/index";
     }
 
+    @GetMapping("/editguest/{guest_id}")
+    public String editGuest(@PathVariable("guest_id") String guest_id, Model model) {
+        String sql = "SELECT * FROM guests WHERE guest_id = ?";
+        Guest guest = jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Guest.class), guest_id);
+        model.addAttribute("guests", guest);
+        return "editguest";
+    }
+
+    @PostMapping("/editguest")
+    public String editGuest(Guest guest) {
+        String sql = "UPDATE guests SET guest_id = ?, name = ? WHERE guest_id = ?";
+        jdbcTemplate.update(sql, guest.getGuest_id(), guest.getName(), guest.getGuest_id());
+        return "redirect:/index";
+    }
+
 }
