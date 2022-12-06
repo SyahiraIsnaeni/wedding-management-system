@@ -98,7 +98,6 @@ public class WeddingController{
         model.addAttribute("guests", guestList);
         return "guest";
     }
-
     @GetMapping("/weddingdetail/{wedding_id}")
     public String weddingDetail(@PathVariable("wedding_id") String wedding_id, Model model) {
         String sql = "SELECT * FROM weddings JOIN location ON (weddings.location_id = location.location_id) JOIN admin ON (weddings.admin_id = admin.admin_id) WHERE wedding_id = ?";
@@ -195,6 +194,41 @@ public class WeddingController{
         List<Wedding> wedding = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Wedding.class), couple_name);
         model.addAttribute("weddings", wedding);
         return ("search");
+    }
+
+    @GetMapping("/addlocation")
+    public String addLocation(Model model) {
+        return "addlocation";
+    }
+
+    @RequestMapping(value ="/addlocation")
+    public String addLocation(Location location, Model model) {
+        String sql = "INSERT INTO location VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql,
+                location.getLocation_id(), location.getName(), location.getAddress(), location.getCapacity(), location.getPrice());
+        return "redirect:/index";
+    }
+
+    @GetMapping("/deletelocation/{location_id}")
+    public String deleteLocation(@PathVariable("location_id") String location_id) {
+        String sql = "DELETE FROM location WHERE location_id = ?";
+        jdbcTemplate.update(sql, location_id);
+        return "redirect:/index";
+    }
+
+    @GetMapping("/editlocation/{location_id}")
+    public String editLocation(@PathVariable("location_id") String location_id, Model model) {
+        String sql = "SELECT * FROM location WHERE location_id = ?";
+        Location location = jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Location.class), location_id);
+        model.addAttribute("location", location);
+        return "editlocation";
+    }
+
+    @PostMapping("/editlocation")
+    public String editLocation(Location location) {
+        String sql = "UPDATE location SET location_id = ?, name = ?, address = ?, capacity = ?, price = ? WHERE location_id = ?";
+        jdbcTemplate.update(sql, location.getLocation_id(), location.getName(), location.getAddress(),location.getCapacity(), location.getPrice(), location.getLocation_id());
+        return "redirect:/index";
     }
 
 }

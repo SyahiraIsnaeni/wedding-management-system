@@ -42,7 +42,11 @@ thymeleaf template engine -->
         crossorigin="anonymous"
 ></script>
 <!-- <body> -->
+<br>
+<br>
 <h1 class="text-center">LOCATION DATA</h1>
+<br>
+<a href="/addlocation" class="btn btn-info w-full mt-2">Add Location Data</a>
 <div class="mt-2">
     <table class="table">
         <thead class="thead-dark">
@@ -52,6 +56,7 @@ thymeleaf template engine -->
             <th scope="col">ADDRESS</th>
             <th scope="col">CAPACITY</th>
             <th scope="col">PRICE</th>
+            <th scope="col">ACTION</th>
         </tr>
         </thead>
 
@@ -62,6 +67,10 @@ thymeleaf template engine -->
             <td th:text="${L.address}"></td>
             <td th:text="${L.capacity}"></td>
             <td th:text="${L.price}"></td>
+            <td>
+                <a th:href="@{/editlocation/{location_id}(location_id=${L.location_id})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/deletelocation/{location_id}(location_id=${L.location_id})}" class="btn btn-danger">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>

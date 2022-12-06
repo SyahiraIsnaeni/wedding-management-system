@@ -45,10 +45,7 @@ thymeleaf template engine -->
 <br>
 <h1 class="text-center">WEDDING DATA</h1>
 <br>
-<a href="/admin" class="btn btn-success w-full mt-2">Admin Data</a>
-<a href="/location" class="btn btn-success w-full mt-2">Location Data</a>
-<a href="/recycle" class="btn btn-warning w-full mt-2">Recycle Data</a>
-<a href="/addwedding" class="btn btn-info w-full mt-2">Add Wedding Data</a>
+<a href="/addwedding" class="btn btn-info w-full">Add Wedding Data</a>
 <form th:action="@{/search}">
     <div class="form-group">
         <label for="couple_name"></label>
@@ -62,6 +59,11 @@ thymeleaf template engine -->
     </div>
 </form>
 <div class="mt-2">
+    <a href="/admin" class="btn btn-outline-success w-full mt-2">Admin Data</a>
+    <a href="/location" class="btn btn-outline-success w-full mt-2">Location Data</a>
+    <a href="/recycle" class="btn btn-outline-warning w-full mt-2">Recycle Data</a>
+    <br>
+    <br>
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -89,8 +91,8 @@ thymeleaf template engine -->
         </tbody>
 
     </table>
+    <a th:href="@{/}" class="btn btn-secondary">Log Out</a>
 </div>
-<a th:href="@{/}" class="btn btn-secondary">Log Out</a>
 <br>
 <br>
 <!-- Bootstrap -->
